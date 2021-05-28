@@ -31,6 +31,16 @@ on the first VM.
 1. Try to convert those steps into a playbook.
 1. Convert the playbook into a role.
 
+## In which order to read files in here
+- start with this one README.md (obviously ;-)
+- install-procedure.md
+- ansible/ansible.cfg
+- ansible/hosts
+- ansible/files/*
+- ansible/zookeeper.yml
+- ansible/zookeeper-role.yml
+- ansible/roles/zookeeper/*
+
 ### Checking the final result
 1. systemctl status zookeeper should show ok on all hosts
 2. running those commands one of the hosts you should see one of them 
