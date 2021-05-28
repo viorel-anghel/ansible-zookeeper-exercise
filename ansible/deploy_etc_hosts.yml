@@ -1,0 +1,7 @@
+---
+- name: deploy /etc/hosts
+  hosts: all
+  gather_facts: False
+  tasks:
+    - copy: src=/etc/hosts dest=/etc/hosts owner=root group=root mode=0644
+

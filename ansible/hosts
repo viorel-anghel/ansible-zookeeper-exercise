@@ -1,0 +1,6 @@
+
+[zookeeper]
+ansible25    zookeeper_id=1
+ansible26    zookeeper_id=2
+ansible27    zookeeper_id=3
+
