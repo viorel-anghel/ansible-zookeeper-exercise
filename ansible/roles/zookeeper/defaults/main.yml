@@ -1,0 +1,3 @@
+version: 3.5.9
+url: http://mirrors.ukfast.co.uk/sites/ftp.apache.org/zookeeper/zookeeper-{{ version }}/apache-zookeeper-{{ version }}-bin.tar.gz
+

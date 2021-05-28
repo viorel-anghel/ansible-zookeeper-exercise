@@ -1,0 +1,7 @@
+---
+- name: install zookeeper using role
+  hosts: zookeeper-role
+
+  roles:
+    - zookeeper
+

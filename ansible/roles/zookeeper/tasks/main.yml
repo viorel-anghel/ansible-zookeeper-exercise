@@ -1,0 +1,55 @@
+---
+- name: install java packages
+  yum: 
+    name:
+      - java-1.8.0-openjdk
+    state: present
+
+# get_url module does not need wget installed
+- name: download targz under /opt
+  get_url:
+    url: "{{ url }}"
+    dest: /opt
+
+# create group before user
+- name: create group
+  group: name=zookeeper state=present
+
+- name: create user
+  user: name=zookeeper group=zookeeper       
+
+- name: unarchive
+  unarchive:
+    src: /opt/apache-zookeeper-{{ version }}-bin.tar.gz
+    dest: /opt
+    remote_src: yes
+  args:  
+    creates: /opt/apache-zookeeper-{{ version }}-bin/bin
+
+- name: symlink
+  file: src=/opt/apache-zookeeper-{{ version }}-bin dest=/opt/zookeeper state=link
+
+- name: data directory
+  file: dest=/opt/zookeeper/data state=directory owner=zookeeper group=zookeeper
+
+- name: set owner on everything under /opt/zookeeper/
+  file: dest=/opt/zookeeper/ owner=zookeeper group=zookeeper recurse=yes
+
+# config file zoo.cfg is now a template instead of a static file
+- name: config file
+  template: src=zoo.cfg.j2 dest=/opt/zookeeper/conf/zoo.cfg owner=zookeeper group=zookeeper
+  notify: restart zookeeper
+
+# config file myid should go under /opt/zookeeper/data/ and it uses template
+# with the variable decklared in inventory zookeeper_id
+- name: myid file
+  template: src=myid.j2 dest=/opt/zookeeper/data/myid owner=zookeeper group=zookeeper
+  notify: restart zookeeper
+
+- name: systemd file
+  copy: src=zookeeper.service dest=/usr/lib/systemd/system/zookeeper.service
+  notify: reload systemd
+
+- name: service
+  service: name=zookeeper state=started enabled=yes
+

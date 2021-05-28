@@ -4,3 +4,8 @@ ansible25    zookeeper_id=1
 ansible26    zookeeper_id=2
 ansible27    zookeeper_id=3
 
+[zookeeper-role]
+ansible28    zookeeper_id=1
+ansible29    zookeeper_id=2
+ansible30    zookeeper_id=3
+
