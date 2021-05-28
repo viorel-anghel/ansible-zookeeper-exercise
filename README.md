@@ -65,6 +65,11 @@ and `files/zoo.cfg.j2`
 4. `ansible-playbook zookeeper.yml` 
 
 ### Converting to a role
+1. check everything under `roles/zookeeper`. mostly copy paste from the playbook 
+and split into specific files and locations
+2. now you see the reason for that fancy syntax from `zoo.cfg.j2`. We do not 
+hardcode hostnames inside roles. Roles should be reusable with no changes
+3. to run it, `ansible-playbook zookeeper-role.yml`
 
 
 
