@@ -7,6 +7,14 @@ with updates and corrections in 2020-05-28
 - firewall - there in no firewall on our VMs on private interface
 
 ```bash
+
+# set those variables to match your hosts
+ZK1=ansible25
+ZK2=ansible26
+ZK3=ansible27
+
+# from here you can just copy-paste everything
+
 yum install -y java-1.8.0-openjdk
 groupadd zookeeper 
 useradd -g zookeeper -s /sbin/nologin zookeeper
@@ -26,9 +34,9 @@ initLimit=10
 syncLimit=5
 dataDir=/opt/zookeeper/data
 clientPort=2181
-server.1=ansible25:2888:3888
-server.2=ansible26:2888:3888
-server.3=ansible27:2888:3888
+server.1=${ZK1}:2888:3888
+server.2=${ZK2}:2888:3888
+server.3=${ZK3}:2888:3888
 EOF
 
 echo 1 >/opt/zookeeper/data/myid
